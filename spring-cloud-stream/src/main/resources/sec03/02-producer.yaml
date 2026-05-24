@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    function:
+      definition:
+        producer
+    stream:
+      poller:
+        fixed-delay: 1000   # default value
+      bindings:
+        producer-out-0:
+          destination: demo-topic 
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+
+server:
+  port: 9090

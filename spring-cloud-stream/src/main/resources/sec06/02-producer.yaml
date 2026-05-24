@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    function:
+      definition:
+        reactiveProducer
+    stream:
+      poller:
+        fixed-delay: 1  # 1 ms
+      bindings:
+        reactiveProducer-out-0:
+          destination: demo-topic 
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+
+server:
+  port: 9090

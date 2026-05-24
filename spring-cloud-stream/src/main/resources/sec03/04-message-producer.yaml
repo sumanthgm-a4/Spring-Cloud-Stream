@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    function:
+      definition:
+        messageProducer
+    stream:
+      poller:
+        fixed-delay: 1000   # default value
+      bindings:
+        messageProducer-out-0:
+          destination: demo-topic 
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+          producer-properties:
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+
+server:
+  port: 9090
