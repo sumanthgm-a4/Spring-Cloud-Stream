@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    function:
+      definition: producer
+    stream:
+      poller:
+        fixed-delay: 1000 # 1000ms default value
+      bindings:
+        producer-out-0:
+          destination: order-events
+      kafka:
+        binder:
+          brokers:
+          - localhost:9092

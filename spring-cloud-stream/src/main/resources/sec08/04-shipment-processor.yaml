@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    function:
+      definition: shipmentProcessor
+    stream:
+      bindings:
+        shipmentProcessor-in-0:
+          destination: order-events
+          group: shipment-processor
+        shipmentProcessor-out-0:
+          destination: shipment-events
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+          consumer-properties:
+            auto.offset.reset: earliest

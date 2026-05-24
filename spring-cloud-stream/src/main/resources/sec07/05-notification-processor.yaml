@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    function:
+      definition: notificationProcessor
+    stream:
+      bindings:
+        notificationProcessor-in-0:
+          destination: order-events
+          group: notification-processor
+        notificationProcessor-out-0:
+          destination: notification-events
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+          consumer-properties:
+            auto.offset.reset: earliest

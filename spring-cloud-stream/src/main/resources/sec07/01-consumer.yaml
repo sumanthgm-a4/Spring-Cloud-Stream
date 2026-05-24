@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    function:
+      definition: paymentConsumer;shipmentConsumer;notificationConsumer
+    stream:
+      bindings:
+        paymentConsumer-in-0:
+          destination: payment-events
+          group: business-event-consumer
+        shipmentConsumer-in-0:
+          destination: shipment-events
+          group: business-event-consumer
+        notificationConsumer-in-0:
+          destination: notification-events
+          group: business-event-consumer
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+          consumer-properties:
+            auto.offset.reset: earliest
