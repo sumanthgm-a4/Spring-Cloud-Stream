@@ -1,0 +1,14 @@
+spring:
+    application:
+        name: spring-cloud-stream
+
+    config:
+        import: ${section}/${config}.yaml
+
+# Section and config needa be provided
+# Eg: 
+# SpringApplication.run(
+#     SectionRunner.class,
+#     "--section=sec01",
+#     "--config=03-consumer-group"
+# )
