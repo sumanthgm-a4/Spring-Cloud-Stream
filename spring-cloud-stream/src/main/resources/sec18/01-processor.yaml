@@ -1,0 +1,31 @@
+spring:
+  cloud:
+    function:
+      definition: processor
+    stream:
+      bindings:
+        processor-in-0:
+          destination: transfer-requests
+          group: transfer-service
+        transaction-request-out:
+          destination: transaction-requests
+      kafka:
+        bindings:
+          processor-in-0:
+            consumer:
+              enable-dlq: true
+              dlq-name:  transfer-requests-dlq
+              max-attempts: 3
+        binder:
+          brokers:
+            - localhost:9092
+          transaction:
+            transaction-id-prefix: tx-
+            producer:
+              configuration:
+                acks: all # ensures transactional writes are fully replicated; prevents data loss on broker failure
+          producer-properties:
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+          consumer-properties:
+            key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            auto.offset.reset: earliest
