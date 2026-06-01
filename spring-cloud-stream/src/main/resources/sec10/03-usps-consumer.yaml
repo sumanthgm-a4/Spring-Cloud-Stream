@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    function:
+      definition: uspsConsumer
+    stream:
+      bindings:
+        uspsConsumer-in-0:
+          destination: usps-delivery
+          group: usps-service
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+          consumer-properties:
+            auto.offset.reset: earliest

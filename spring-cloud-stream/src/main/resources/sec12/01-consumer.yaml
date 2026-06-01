@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    function:
+      definition: consumer
+    stream:
+      bindings:
+        consumer-in-0:
+          destination: demo-topic
+          group: demo-group
+          consumer:
+            batch-mode: true
+      kafka:
+        binder:
+          brokers:
+          - localhost:9092
+          consumer-properties:
+            auto.offset.reset: earliest
+            fetch.min.bytes: 1024
+            fetch.max.wait.ms: 500
+            max.poll.records: 1000

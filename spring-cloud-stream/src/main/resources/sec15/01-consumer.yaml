@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    function:
+      definition: consumer
+    stream:
+      bindings:
+        consumer-in-0:
+          destination: demo-topic
+          group: demo-group
+      kafka:
+        bindings:
+          consumer-in-0:
+            consumer:
+              ack-mode: MANUAL
+        binder:
+          brokers:
+          - localhost:9092
+          consumer-properties:
+            auto.offset.reset: earliest

@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    function:
+      definition: deliveryProcessor
+    stream:
+      bindings:
+        deliveryProcessor-in-0:
+          destination: order-events
+          group: delivery-processor
+        digital-delivery-out:
+          destination: digital-delivery
+        physical-delivery-out:
+          destination: physical-delivery
+      kafka:
+        binder:
+          brokers:
+          - localhost:9092
+          consumer-properties:
+            auto.offset.reset: earliest

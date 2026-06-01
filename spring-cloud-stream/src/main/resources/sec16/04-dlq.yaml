@@ -1,0 +1,28 @@
+spring:
+  cloud:
+    function:
+      definition: consumer
+    stream:
+      bindings:
+        consumer-in-0:
+          destination: demo-topic
+          group: demo-group
+          consumer:
+            max-attempts: 3                   # retry delivery attempts
+            back-off-initial-interval: 2000   # wait time before first retry (ms)
+            back-off-multiplier: 1.0          # fixed retry delay
+            default-retryable: false          # should we retry all the exceptions?
+            retryable-exceptions:
+              com.sum.spring_cloud_stream.sec16.exception.InputValidationException: false    # do not retry
+              com.sum.spring_cloud_stream.sec16.exception.ServiceUnavailableException: true  # retry
+      kafka:
+        bindings:
+          consumer-in-0:
+            consumer:
+              enable-dlq: true
+              dlq-name: demo-topic-dlq
+        binder:
+          brokers:
+            - localhost:9092
+          consumer-properties:
+            auto.offset.reset: earliest

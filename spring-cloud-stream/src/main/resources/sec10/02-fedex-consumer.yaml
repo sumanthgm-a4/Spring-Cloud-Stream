@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    function:
+      definition: fedexConsumer
+    stream:
+      bindings:
+        fedexConsumer-in-0:
+          destination: fedex-delivery
+          group: fedex-service
+      kafka:
+        binder:
+          brokers:
+          - localhost:9092
+          consumer-properties:
+            auto.offset.reset: earliest
